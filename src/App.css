@@ -1,0 +1,197 @@
+.app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 0, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 0, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.neon-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: 
+    linear-gradient(to right, rgba(0, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: rotateX(60deg) translateY(-25%);
+  z-index: 0;
+  animation: grid-scroll 10s linear infinite;
+}
+
+@keyframes grid-scroll {
+  from { transform: rotateX(60deg) translateY(-25%); }
+  to { transform: rotateX(60deg) translateY(0%); }
+}
+
+.content {
+  z-index: 10;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  padding-bottom: 50px;
+}
+
+.header {
+  text-align: center;
+  padding: 20px;
+  border: 4px solid var(--neon-pink);
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 20px var(--neon-pink), inset 0 0 10px var(--neon-pink);
+  transform: skewX(-10deg);
+}
+
+.header h1 {
+  font-size: 3rem;
+  color: var(--neon-cyan);
+  text-shadow: 2px 2px 0 var(--neon-magenta), 0 0 10px var(--neon-cyan);
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid var(--neon-green);
+  box-shadow: 0 0 15px var(--neon-green);
+}
+
+.color-swatch {
+  border: 2px solid white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: black;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px white;
+}
+
+.swatch-box {
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: 10px;
+  border: 1px solid #333;
+}
+
+.swatch-info {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.swatch-name {
+  font-weight: bold;
+  color: var(--neon-pink);
+  margin-bottom: 5px;
+}
+
+.wavelength-picker {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--neon-orange);
+  box-shadow: 0 0 15px var(--neon-orange);
+}
+
+.wavelength-slider {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to right, 
+    #ff00ff, #ff007f, #9400d3, #00ffff, #4b0082, #39ff14, #ff4500
+  );
+  border: 2px solid white;
+  position: relative;
+  cursor: crosshair;
+}
+
+.slider-handle {
+  position: absolute;
+  top: -5px;
+  height: 50px;
+  width: 10px;
+  background: white;
+  box-shadow: 0 0 10px white;
+}
+
+.preview-area {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(0,0,0,0.8);
+  border: 2px solid var(--neon-purple);
+  box-shadow: 0 0 15px var(--neon-purple);
+}
+
+.inkjet-preview {
+  flex: 1;
+  height: 300px;
+  background: #222;
+  border: 4px dashed var(--neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.print-head {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: #444;
+  animation: print-scan 4s linear infinite;
+}
+
+@keyframes print-scan {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.matrix-char {
+  position: absolute;
+  color: var(--neon-pink);
+  font-size: 20px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(110vh); }
+}
